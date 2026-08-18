@@ -50,9 +50,9 @@
 | ファイル | 形式 | 対象 |
 |---------|------|------|
 | `smart_speaker_*_cpu_x64-setup.exe` | インストーラー（推奨） | すべての Windows PC |
-| `smart_speaker_*_cuda_x64-setup.exe` | インストーラー | NVIDIA GPU 搭載 PC（聞き取りが高速） |
+| `smart_speaker_*_cuda_x64-setup.exe` | インストーラー | NVIDIA GPU 搭載 PC（聞き取りが高速）。**別途 CUDA Toolkit 12.8 以降が必要** |
 | `smart_speaker-*-windows-cpu_portable.7z` | ポータブル版 | インストールせずに使いたい方 |
-| `smart_speaker-*-windows-cuda_portable.7z` | ポータブル版 | 同上（NVIDIA GPU 向け） |
+| `smart_speaker-*-windows-cuda_portable.7z` | ポータブル版 | 同上（NVIDIA GPU 向け）。**別途 CUDA Toolkit 12.8 以降が必要** |
 
 `latest-cpu.json` / `latest-cuda.json` はアプリの自動更新用ファイルです（手動ダウンロード不要）。
 
@@ -91,8 +91,20 @@ Windows SmartScreen の警告画面が出ます（インストーラー版・ポ
 | 空き容量 | 15 GB | 20 GB 以上 |
 | マイク・スピーカー | 必須 | ノイズキャンセリング付きマイク |
 | GPU（CUDA 版のみ） | NVIDIA GTX 1060 以上 + ドライバー 570.x 以上 | RTX 3060 以上 |
+| CUDA Toolkit（CUDA 版のみ） | **12.8 以降の 12.x が必須**。入っていないと起動しません | 12.8 |
 
 CPU 版は GPU なしで動きます。**迷ったら CPU 版**を選んでください。
+
+> **CUDA 版を選ぶ前に**: CUDA 版は `cudart64_12.dll` / `cublas64_12.dll` を必要としますが、
+> これらは NVIDIA のグラフィックスドライバーには含まれていません。
+> [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) から **12.8 以降の 12.x**
+> を別途インストールしてください（配布ビルドは CUDA 12.8 で作っています。13.x は不可）。
+> 入れずに起動すると、アプリの画面が出る前に
+> 「`cudart64_12.dll` が見つからないため、コードの実行を続行できません。」
+> 「`cublas64_12.dll` が見つからないため、コードの実行を続行できません。」
+> のダイアログが順に出ます。
+> どちらも**アプリを再インストールしても直りません**（ダイアログはそう案内しますが、
+> 足りないのはアプリのファイルではなく CUDA Toolkit の側です）。
 
 ---
 
@@ -157,7 +169,7 @@ CPU 版は GPU なしで動きます。**迷ったら CPU 版**を選んでく�
 | 応答が返ってこない | Ollama が動いているか確認（コマンドプロンプトで `ollama serve`） |
 | 声が出ない | VOICEVOX が起動しているか確認（http://localhost:50021 が開けるか） |
 | 聞き取りが遅い | 設定から軽い Whisper モデル（small / base）に変更、または CUDA 版を使用 |
-| CUDA 版で `cudart64_12.dll not found` | CUDA Toolkit 12.x を入れて再起動、または CPU 版を使用 |
+| CUDA 版が起動せず `cudart64_12.dll が見つからない` と出る | CUDA Toolkit 12.8 以降の 12.x が入っていません（ドライバーだけでは足りません）。入れて再起動するか、CPU 版を使用 |
 
 解決しない場合は [Issues](../../issues) へ、症状と使用バージョンを添えてお知らせください。
 
