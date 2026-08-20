@@ -14,7 +14,7 @@
   収録・変換・撮影時のチェック項目は開発リポジトリの docs/images/README.md に置いてある。
 -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/sumikaapp/sumika/main/docs/images/hero.webp" alt="呼びかけると、すみかが応答する様子" width="640">
+  <img src="https://raw.githubusercontent.com/sumikaapp/sumika/main/docs/images/hero.webp" alt="呼びかけると応答する様子" width="640">
 </p>
 
 あなたが決めた呼び名で話しかけると答えてくれる、**すべてがあなたの PC の中で完結する**
@@ -34,7 +34,7 @@
   なりパネルの文字が読めないので、フル幅で縦に積む。
 -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/sumikaapp/sumika/main/docs/images/schedule.webp" alt="「次の予定は？」と聞いたときの画面。予定の一覧パネルと、すみかの応答" width="860">
+  <img src="https://raw.githubusercontent.com/sumikaapp/sumika/main/docs/images/schedule.webp" alt="「次の予定は？」と聞いたときの画面。予定の一覧パネルと、その応答" width="860">
   <br>
   <sub>聞いたことに合わせて画面が切り替わります（予定を尋ねたとき）</sub>
 </p>
