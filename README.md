@@ -53,8 +53,8 @@
 
 | ファイル | 形式 | 対象 |
 |---------|------|------|
-| `smart_speaker_*_cpu_x64-setup.exe` | インストーラー（推奨） | すべての Windows PC |
-| `smart_speaker_*_cuda_x64-setup.exe` | インストーラー | NVIDIA GPU 搭載 PC（聞き取りが高速）。**別途 CUDA Toolkit 12.8 以降が必要** |
+| `smart_speaker_*_cuda_x64-setup.exe` | インストーラー（推奨） | NVIDIA GPU 搭載 PC。**別途 CUDA Toolkit 12.8 以降が必要** |
+| `smart_speaker_*_cpu_x64-setup.exe` | インストーラー | GPU が無い PC。動きますが、聞き取りだけで十数秒かかります（下記） |
 | `smart_speaker-*-windows-cpu_portable.7z` | ポータブル版 | インストールせずに使いたい方 |
 | `smart_speaker-*-windows-cuda_portable.7z` | ポータブル版 | 同上（NVIDIA GPU 向け）。**別途 CUDA Toolkit 12.8 以降が必要** |
 
@@ -82,7 +82,7 @@ Windows SmartScreen の警告画面が出ます（インストーラー版・ポ
 
 | 必要なもの | 容量の目安 | 入手方法 |
 |---|---|---|
-| [Ollama](https://ollama.com/) + 応答生成モデル（gemma4） | 約 9.6 GB | セットアップが自動で導入 |
+| [Ollama](https://ollama.com/) + 応答生成モデル（gemma4:e2b-it-qat）+ 検索用モデル | モデルで約 4.6 GB（Ollama 本体は別） | セットアップが自動で導入 |
 | Whisper 音声認識モデル | 約 1.6 GB | 初回起動時に自動ダウンロード（軽いモデルにも変更可） |
 | [VOICEVOX](https://voicevox.hiroshiba.jp/) | 1〜3 GB | 公式サイトから手動インストール |
 
@@ -91,13 +91,21 @@ Windows SmartScreen の警告画面が出ます（インストーラー版・ポ
 | 項目 | 最小 | 推奨 |
 |---|---|---|
 | OS | Windows 10 / 11（64bit） | Windows 11 |
-| メモリ | 8 GB | 16 GB 以上 |
+| CPU | AVX2 対応（Intel Core 第 4 世代以降 / AMD Ryzen 以降） | — |
+| GPU | NVIDIA・VRAM 6 GB 以上 + ドライバー 570.x 以上 | — |
+| メモリ | 未計測 | 16 GB 以上 |
 | 空き容量 | 15 GB | 20 GB 以上 |
 | マイク・スピーカー | 必須 | ノイズキャンセリング付きマイク |
-| GPU（CUDA 版のみ） | NVIDIA GTX 1060 以上 + ドライバー 570.x 以上 | RTX 3060 以上 |
 | CUDA Toolkit（CUDA 版のみ） | **12.8 以降の 12.x が必須**。入っていないと起動しません | 12.8 |
 
-CPU 版は GPU なしで動きます。**迷ったら CPU 版**を選んでください。
+GPU は **RTX 3060 Laptop（VRAM 6 GB）で動作を確認**しています。既定の設定で会話中に
+使うのは約 4.4 GB で、話し終えてから返事が鳴り始めるまで 2 秒弱です。
+VRAM が 6 GB より少ない GPU と、メモリの必要量はまだ確かめていません。
+
+**GPU が無い PC でも CPU 版は起動しますが、おすすめしません。** 聞き取りだけで
+17〜19 秒かかり、会話として使える速さになりません。
+2013 年頃より前の Intel CPU や、2020 年頃までの Atom / Celeron / Pentium は
+AVX2 を持たないため動きません（起動時にそう表示して止まります）。
 
 > **CUDA 版を選ぶ前に**: CUDA 版は `cudart64_12.dll` / `cublas64_12.dll` を必要としますが、
 > これらは NVIDIA のグラフィックスドライバーには含まれていません。
